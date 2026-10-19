@@ -1,0 +1,206 @@
+/* Styling for Three Interactive Portfolio Projects */
+
+/* Project 1: The Idea Greenhouse */
+.greenhouse-chamber {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.greenhouse-cloche-svg {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.steam-cloud {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.greenhouse-chamber.misted .steam-cloud {
+  opacity: 0.8;
+  animation: steamRise 2s infinite ease-out;
+}
+
+@keyframes steamRise {
+  0% { transform: translateX(-50%) translateY(0) scale(0.8); opacity: 0.8; }
+  100% { transform: translateX(-50%) translateY(-25px) scale(1.4); opacity: 0; }
+}
+
+.greenhouse-bulb {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+}
+
+.greenhouse-controls {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.interactive-mini-btn {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-organic);
+  color: var(--text-main);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-serif);
+  transition: all 0.2s ease;
+}
+
+.interactive-mini-btn:hover {
+  border-color: var(--c-yellow);
+  color: var(--c-yellow);
+  transform: translateY(-1px);
+}
+
+[data-theme="day"] .interactive-mini-btn:hover {
+  border-color: var(--c-leaf-green);
+  color: var(--c-leaf-green);
+}
+
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--c-yellow-soft);
+  text-align: center;
+  margin-top: 0.6rem;
+}
+
+[data-theme="day"] .status-pill {
+  color: var(--c-leaf-dark);
+}
+
+/* Project 2: The Story Orchard */
+.orchard-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orchard-tree-svg {
+  width: 170px;
+  height: 150px;
+  transition: transform 0.3s ease;
+}
+
+.orchard-stage.shaking .orchard-tree-svg {
+  animation: branchShake 0.6s ease-in-out;
+}
+
+@keyframes branchShake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-4deg); }
+  40% { transform: rotate(4deg); }
+  60% { transform: rotate(-2deg); }
+  80% { transform: rotate(2deg); }
+}
+
+.hanging-fruit {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hanging-fruit:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 6px var(--c-yellow));
+}
+
+.harvest-basket {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px dashed var(--border-organic);
+  border-radius: 6px;
+  padding: 0.6rem;
+  font-family: var(--font-hand);
+  font-size: 0.9rem;
+  color: var(--text-quote);
+  text-align: center;
+  margin-top: 0.6rem;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Project 3: The Tomorrow Machine */
+.machine-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.machine-svg {
+  width: 160px;
+  height: 140px;
+}
+
+.brass-cog {
+  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.machine-stage.cranking .brass-cog-large {
+  animation: spinCogLarge 1.2s infinite linear;
+}
+
+.machine-stage.cranking .brass-cog-small {
+  animation: spinCogSmall 1.2s infinite linear;
+}
+
+@keyframes spinCogLarge {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCogSmall {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Ticker tape printout */
+.ticker-tape {
+  background: #fbf5e6;
+  color: #1e1e1e;
+  border-left: 2px dashed #999;
+  border-right: 2px dashed #999;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  text-align: center;
+  margin-top: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ticker-tape::before {
+  content: "PROGNOSIS: ";
+  font-weight: bold;
+  color: #b33924;
+}

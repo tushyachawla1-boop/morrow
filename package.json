@@ -1,0 +1,21 @@
+{
+  "name": "morrow-the-little-internet-gardener",
+  "version": "1.0.0",
+  "description": "A whimsical, immersive, early-internet storybook website for Morrow — The Little Internet Gardener for haX.baby Track 2.",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js",
+    "preview": "node serve.js",
+    "test": "node --check serve.js"
+  },
+  "keywords": [
+    "haxbaby",
+    "storybook",
+    "original-character",
+    "retro-web",
+    "web-audio"
+  ],
+  "author": "Morrow's Caretakers",
+  "license": "MIT"
+}

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morrow — The Little Internet Gardener</title>
+  <meta name="description" content="A whimsical, early-internet storybook garden where forgotten ideas get another chance to bloom. Made for haX.baby Track 2.">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/character.css">
+  <link rel="stylesheet" href="styles/garden.css">
+  <link rel="stylesheet" href="styles/portfolio.css">
+</head>
+<body>
+
+  <!-- Retro early-web paper texture overlay -->
+  <div class="paper-overlay" aria-hidden="true"></div>
+
+  <!-- Background Sky Canvas (Stars, Sunbeams, Floating Seeds) -->
+  <div class="sky-canvas" aria-hidden="true">
+    <div class="sky-stars"></div>
+    <div class="sky-sunbeams"></div>
+  </div>
+
+  <!-- Top Navigation & Controls Ribbon -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand" aria-label="Morrow's Garden Home">
+        <span class="brand-icon" aria-hidden="true">🌱</span>
+        <span class="brand-text">Morrow’s Nursery</span>
+        <span class="brand-tag">est. 2003</span>
+      </a>
+
+      <nav aria-label="Garden Sections">
+        <ul class="nav-links">
+          <li><a href="#about">About Morrow</a></li>
+          <li><a href="#portfolio">Inventions & Plots</a></li>
+          <li><a href="#origin">Origin Story</a></li>
+          <li><a href="#interactive-garden">Plant a Seed</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Sound Toggle (Prompt: Default Muted, Clear Label) -->
+        <button id="sound-toggle-btn" class="icon-btn" aria-pressed="false" aria-label="Sound is Muted. Click to turn sound on.">
+          <span aria-hidden="true">🔔</span>
+          <span id="sound-status-text">Sound: Muted</span>
+          <span class="audio-waves" aria-hidden="true">
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+          </span>
+        </button>
+
+        <!-- Day / Night Toggle -->
+        <button id="theme-toggle-btn" class="icon-btn" aria-label="Current theme: Night. Click to switch to Day.">
+          <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+          <span id="theme-toggle-text">Night</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- 1. HERO SECTION -->
+    <section id="hero" class="hero-section" aria-labelledby="hero-heading">
+      <div class="hero-vignette">
+        <!-- Vintage corner flourishes -->
+        <div class="corner-flourish corner-tl" aria-hidden="true"></div>
+        <div class="corner-flourish corner-tr" aria-hidden="true"></div>
+        <div class="corner-flourish corner-bl" aria-hidden="true"></div>
+        <div class="corner-flourish corner-br" aria-hidden="true"></div>
+
+        <div class="hero-badge-pill">
+          <span>✨</span>
+          <span>A tiny magical place discovered on the web</span>
+        </div>
+
+        <h1 id="hero-heading" class="hero-title">Morrow</h1>
+        <p class="hero-tagline">“Not every little idea is ready to bloom.”</p>
+
+        <!-- Central Character Stage: Morrow SVG with Eye Rigging -->
+        <div class="hero-character-stage">
+          <div id="morrow-hero-character" class="character-container">
+            <div id="morrow-speech" class="speech-bubble" aria-live="polite">
+              “Hello quiet traveler! Look closely at the roots...”
+            </div>
+
+            <!-- Hand-crafted Morrow SVG Creature -->
+            <svg class="character-svg" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of Morrow, a soft leaf-eared creature with a seed satchel and expressive eyes">
+              <defs>
+                <radialGradient id="bodyGrad" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#80a88a" />
+                  <stop offset="65%" stop-color="#557d60" />
+                  <stop offset="100%" stop-color="#3b5b44" />
+                </radialGradient>
+                <radialGradient id="earGrad" cx="40%" cy="30%" r="60%">
+                  <stop offset="0%" stop-color="#9ac7a4" />
+                  <stop offset="100%" stop-color="#497255" />
+                </radialGradient>
+                <filter id="lampGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- Morrow Body Group (Animated Breathing) -->
+              <g class="morrow-body-group">
+
+                <!-- Leaf Ears -->
+                <!-- Left Ear -->
+                <g id="morrow-ear-l" class="morrow-ear-left">
+                  <path d="M 68 76 C 45 42, 28 20, 20 8 C 38 10, 60 30, 72 65 Z" fill="url(#earGrad)" stroke="#2b4733" stroke-width="1.8" />
+                  <path d="M 28 16 Q 48 38 66 70" stroke="#a3d6ae" stroke-width="1.2" fill="none" opacity="0.7" />
+                  <path d="M 38 28 Q 30 35 25 40" stroke="#a3d6ae" stroke-width="1" fill="none" opacity="0.6" />
+                </g>
+
+                <!-- Right Ear -->
+                <g id="morrow-ear-r" class="morrow-ear-right">
+                  <path d="M 132 76 C 155 42, 172 20, 180 8 C 162 10, 140 30, 128 65 Z" fill="url(#earGrad)" stroke="#2b4733" stroke-width="1.8" />
+                  <path d="M 172 16 Q 152 38 134 70" stroke="#a3d6ae" stroke-width="1.2" fill="none" opacity="0.7" />
+                  <path d="M 162 28 Q 170 35 175 40" stroke="#a3d6ae" stroke-width="1" fill="none" opacity="0.6" />
+                </g>
+
+                <!-- Soft Pear-Shaped Body -->
+                <path d="M 100 50 C 62 50, 52 82, 54 115 C 50 148, 48 185, 75 198 C 90 205, 110 205, 125 198 C 152 185, 150 148, 146 115 C 148 82, 138 50, 100 50 Z" 
+                      fill="url(#bodyGrad)" stroke="#2b4733" stroke-width="2.5" />
+
+                <!-- Tummy Highlight (Soft light patch) -->
+                <ellipse cx="100" cy="145" rx="32" ry="38" fill="#7fa889" opacity="0.45" />
+
+                <!-- Little Feet with Garden Dirt Smudges -->
+                <!-- Left Foot -->
+                <g transform="translate(68, 192)">
+                  <ellipse cx="12" cy="8" rx="14" ry="9" fill="#557d60" stroke="#2b4733" stroke-width="1.8" />
+                  <!-- Dirt smudge -->
+                  <path d="M 2 8 C 6 4, 18 3, 24 9 C 20 15, 6 14, 2 8 Z" fill="#2b1d16" opacity="0.65" />
+                </g>
+                <!-- Right Foot -->
+                <g transform="translate(108, 192)">
+                  <ellipse cx="12" cy="8" rx="14" ry="9" fill="#557d60" stroke="#2b4733" stroke-width="1.8" />
+                  <!-- Dirt smudge -->
+                  <path d="M 0 9 C 6 3, 18 4, 22 8 C 18 15, 4 15, 0 9 Z" fill="#2b1d16" opacity="0.65" />
+                </g>
+
+                <!-- Seed Satchel (Worn diagonally across chest) -->
+                <g id="morrow-satchel">
+                  <!-- Strap -->
+                  <path d="M 68 85 Q 98 120 132 155" stroke="#795548" stroke-width="5.5" stroke-linecap="round" fill="none" />
+                  <path d="M 68 85 Q 98 120 132 155" stroke="#a1887f" stroke-width="1.8" stroke-dasharray="3,3" fill="none" />
+                  <!-- Satchel Pouch -->
+                  <rect x="118" y="142" width="28" height="25" rx="6" fill="#8d6e63" stroke="#4e342e" stroke-width="2" transform="rotate(-12 132 154)" />
+                  <!-- Satchel Flap -->
+                  <path d="M 116 144 Q 132 154 146 140" stroke="#5d4037" stroke-width="2" fill="none" />
+                  <!-- Wooden Button -->
+                  <circle cx="131" cy="151" r="2.8" fill="#d7ccc8" stroke="#4e342e" stroke-width="1" />
+                </g>
+
+                <!-- Coral Blush Spots on Cheeks -->
+                <ellipse cx="68" cy="118" rx="8" ry="5" fill="#f4978e" opacity="0.55" />
+                <ellipse cx="132" cy="118" rx="8" ry="5" fill="#f4978e" opacity="0.55" />
+
+                <!-- Gentle Smile -->
+                <path d="M 94 122 Q 100 128 106 122" stroke="#233527" stroke-width="2.2" stroke-linecap="round" fill="none" />
+
+                <!-- Left Eye Rigging -->
+                <g class="eye-lid" transform-origin="76 102">
+                  <ellipse cx="76" cy="102" rx="14" ry="17" class="eye-sclera" />
+                  <g id="pupil-left">
+                    <circle cx="76" cy="102" r="7" class="eye-pupil" />
+                    <circle cx="73.5" cy="99" r="2.5" class="eye-highlight" />
+                    <circle cx="78" cy="104.5" r="1.2" class="eye-highlight" opacity="0.7" />
+                  </g>
+                </g>
+
+                <!-- Right Eye Rigging -->
+                <g class="eye-lid" transform-origin="124 102">
+                  <ellipse cx="124" cy="102" rx="14" ry="17" class="eye-sclera" />
+                  <g id="pupil-right">
+                    <circle cx="124" cy="102" r="7" class="eye-pupil" />
+                    <circle cx="121.5" cy="99" r="2.5" class="eye-highlight" />
+                    <circle cx="126" cy="104.5" r="1.2" class="eye-highlight" opacity="0.7" />
+                  </g>
+                </g>
+
+                <!-- Little Paws resting gently -->
+                <ellipse cx="78" cy="150" rx="7" ry="6" fill="#689371" stroke="#2b4733" stroke-width="1.6" />
+                <ellipse cx="108" cy="158" rx="7" ry="6" fill="#689371" stroke="#2b4733" stroke-width="1.6" />
+
+              </g>
+            </svg>
+
+            <!-- 6. SECRET EASTER EGG TRIGGER (Hidden clickable seed near Morrow's roots) -->
+            <div class="secret-seed-wrapper">
+              <button id="secret-seed-trigger" class="secret-seed-btn" aria-label="A tiny golden acorn resting quietly in the moss. Wonder what happens if you tap it?" title="A quiet golden seed...">
+                <svg class="secret-seed-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 12 3 C 8 3, 4 6, 4 9 C 4 10, 8 11, 12 11 C 16 11, 20 10, 20 9 C 20 6, 16 3, 12 3 Z" fill="#795548" />
+                  <path d="M 5 10 C 5 16, 9 21, 12 22 C 15 21, 19 16, 19 10 Z" fill="#f4be5e" stroke="#d49a37" stroke-width="1" />
+                  <polygon points="12,12 13,14 15,14 13.5,15.5 14,17.5 12,16 10,17.5 10.5,15.5 9,14 11,14" fill="#ffffff" opacity="0.8" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="section-desc">
+          Morrow wanders the untamed thickets of the web, scooping up thoughts left behind on old message boards, forgotten draft folders, and quiet 3 a.m. browser tabs.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-ctas">
+          <a href="#interactive-garden" class="btn-primary">
+            <span>🌱</span>
+            <span>Plant an Idea in the Garden</span>
+          </a>
+          <a href="#about" class="btn-secondary">
+            <span>📜</span>
+            <span>Read Morrow’s Journal</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT MORROW: BOTANICAL CHARACTER SHEET -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-header">
+        <span class="section-tag">~ Field Botanist Dossier ~</span>
+        <h2 id="about-heading" class="section-title">Who is Morrow?</h2>
+        <p class="section-desc">A five-point character sheet recorded in the margin of an early-internet seedling log.</p>
+      </div>
+
+      <div class="journal-sheet">
+        <div class="washi-tape" aria-hidden="true"></div>
+
+        <div class="sheet-grid">
+          <div class="sheet-portrait-box">
+            <!-- Illustrated Miniature Portrait -->
+            <svg viewBox="0 0 160 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Portrait of Morrow with botanical annotations">
+              <rect width="100%" height="100%" fill="rgba(0,0,0,0.1)" rx="8" />
+              <!-- Specimen background grid -->
+              <path d="M 0 40 L 160 40 M 0 80 L 160 80 M 0 120 L 160 120 M 40 0 L 40 160 M 80 0 L 80 160 M 120 0 L 120 160" stroke="rgba(244,190,94,0.15)" stroke-width="1" />
+              <!-- Portrait sketch of Morrow -->
+              <circle cx="80" cy="85" r="42" fill="#557d60" stroke="#2b4733" stroke-width="2" />
+              <!-- Leaf Ears -->
+              <path d="M 55 60 C 35 35, 25 15, 20 8 C 35 12, 50 30, 58 55 Z" fill="#76a081" stroke="#2b4733" stroke-width="1.5" />
+              <path d="M 105 60 C 125 35, 135 15, 140 8 C 125 12, 110 30, 102 55 Z" fill="#76a081" stroke="#2b4733" stroke-width="1.5" />
+              <!-- Eyes -->
+              <ellipse cx="68" cy="80" rx="8" ry="11" fill="#faf6ee" stroke="#2b4733" stroke-width="1" />
+              <circle cx="68" cy="81" r="5" fill="#1b2a47" />
+              <circle cx="66" cy="79" r="1.8" fill="#fff" />
+              <ellipse cx="92" cy="80" rx="8" ry="11" fill="#faf6ee" stroke="#2b4733" stroke-width="1" />
+              <circle cx="92" cy="81" r="5" fill="#1b2a47" />
+              <circle cx="90" cy="79" r="1.8" fill="#fff" />
+              <!-- Smile & Cheeks -->
+              <circle cx="60" cy="90" r="5" fill="#f4978e" opacity="0.6" />
+              <circle cx="100" cy="90" r="5" fill="#f4978e" opacity="0.6" />
+              <path d="M 77 92 Q 80 96 83 92" stroke="#233527" stroke-width="1.8" stroke-linecap="round" fill="none" />
+              <!-- Specimen Label -->
+              <rect x="25" y="132" width="110" height="20" rx="4" fill="#faf6ee" stroke="#2b1d16" stroke-width="1" />
+              <text x="80" y="146" text-anchor="middle" font-family="monospace" font-size="9" fill="#2b1d16">FIG 1.0 — MORROW</text>
+            </svg>
+            <p class="portrait-polaroid-caption">Specimen No. 001 — Found near a decommissioned chatroom.</p>
+          </div>
+
+          <!-- 5-Point Character Sheet -->
+          <ul class="character-dossier">
+            <li class="dossier-item">
+              <span class="dossier-label">1. Name</span>
+              <div class="dossier-value"><strong>Morrow</strong></div>
+            </li>
+
+            <li class="dossier-item">
+              <span class="dossier-label">2. Species, Appearance & Personality</span>
+              <div class="dossier-value">
+                A tiny, soft, leaf-eared garden creature with expressive eyes, a seed satchel and dirt on their little feet. Curious, gentle and a little forgetful.
+              </div>
+            </li>
+
+            <li class="dossier-item">
+              <span class="dossier-label">3. Profession</span>
+              <div class="dossier-value">
+                Collect forgotten ideas and nurture them into plants, inventions and stories.
+              </div>
+            </li>
+
+            <li class="dossier-item">
+              <span class="dossier-label">4. Origin Story</span>
+              <div class="dossier-value">
+                Morrow appeared when a forgotten thought fell out of the internet and landed in an empty patch of digital soil. They started growing a garden for every idea that deserved another chance.
+              </div>
+            </li>
+
+            <li class="dossier-item">
+              <span class="dossier-label">5. Tagline</span>
+              <div class="dossier-value dossier-tagline">
+                “Not every little idea is ready to bloom.”
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. THREE PORTFOLIO PROJECTS -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="section-header">
+        <span class="section-tag">~ Nursery Projects & Plots ~</span>
+        <h2 id="portfolio-heading" class="section-title">Three Living Works</h2>
+        <p class="section-desc">Morrow tends to three distinct garden sanctuaries. Interact with each to see how dormant thoughts are nurtured.</p>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <!-- Project 1: The Idea Greenhouse -->
+        <article class="project-card" aria-labelledby="proj1-title">
+          <div class="project-header">
+            <span class="project-category">Project 01 • Cultivation</span>
+            <h3 id="proj1-title" class="project-title">The Idea Greenhouse</h3>
+          </div>
+
+          <!-- Visual Illustration Stage -->
+          <div class="project-visual-stage">
+            <div id="greenhouse-chamber" class="greenhouse-chamber">
+              <div class="steam-cloud" aria-hidden="true"></div>
+              <svg class="greenhouse-cloche-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glass terrarium dome with tender idea seedling">
+                <!-- Wooden Base -->
+                <rect x="25" y="115" width="90" height="15" rx="4" fill="#5c4033" stroke="#3e2723" stroke-width="2" />
+                <!-- Soil inside base -->
+                <ellipse cx="70" cy="115" rx="40" ry="8" fill="#3d2a1f" />
+                <!-- Idea Sprout -->
+                <path d="M 70 115 Q 68 85 70 65" stroke="#4f785b" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                <path d="M 70 90 Q 52 85 50 75 Q 62 72 70 85" fill="#76a081" />
+                <path d="M 70 75 Q 86 70 88 60 Q 78 58 70 72" fill="#9ec5a8" />
+                <!-- Glowing bulb thought -->
+                <circle id="greenhouse-bulb-glow" cx="70" cy="55" r="10" fill="#f4be5e" opacity="0.9" />
+                <circle cx="70" cy="55" r="4" fill="#ffffff" />
+                <!-- Glass Cloche Dome -->
+                <path d="M 30 115 C 30 50, 42 25, 70 25 C 98 25, 110 50, 110 115 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(244,190,94,0.4)" stroke-width="2" />
+                <!-- Glass Reflection Highlight -->
+                <path d="M 38 105 C 38 60, 48 35, 68 32" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" fill="none" />
+                <!-- Cloche Finial Handle -->
+                <circle cx="70" cy="20" r="5" fill="#f4be5e" stroke="#3e2723" stroke-width="1.5" />
+              </svg>
+            </div>
+          </div>
+
+          <p class="project-description">
+            A climate-controlled glass dome where fragile, half-formed thoughts are shielded from the loud winds of the web until their roots take hold.
+          </p>
+
+          <!-- Interactive Controls -->
+          <div class="project-interactive-panel">
+            <div class="greenhouse-controls">
+              <button id="btn-mist-spray" class="interactive-mini-btn" aria-label="Mist spray: moisten tender ideas with steam">
+                <span>💨</span>
+                <span>Mist Spray</span>
+              </button>
+              <button id="btn-warm-lamp" class="interactive-mini-btn" aria-label="Sunlight lamp: toggle warming amber glow">
+                <span>💡</span>
+                <span>Warm Lamp</span>
+              </button>
+            </div>
+            <div id="greenhouse-status" class="status-pill" aria-live="polite">Climate: Stable & Gentle</div>
+          </div>
+        </article>
+
+        <!-- Project 2: The Story Orchard -->
+        <article class="project-card" aria-labelledby="proj2-title">
+          <div class="project-header">
+            <span class="project-category">Project 02 • Preservation</span>
+            <h3 id="proj2-title" class="project-title">The Story Orchard</h3>
+          </div>
+
+          <!-- Visual Illustration Stage -->
+          <div class="project-visual-stage">
+            <div id="orchard-stage" class="orchard-stage">
+              <svg class="orchard-tree-svg" viewBox="0 0 170 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gnarled storybook tree with glowing narrative fruit lanterns">
+                <!-- Gnarled Trunk & Branches -->
+                <path d="M 85 145 C 80 110, 65 95, 50 80 M 85 110 C 95 90, 115 80, 130 65 M 85 125 C 75 110, 85 75, 82 50" 
+                      stroke="#4a3728" stroke-width="7" stroke-linecap="round" fill="none" />
+                <!-- Canopy Clusters -->
+                <ellipse cx="50" cy="65" rx="30" ry="24" fill="#3b5b44" opacity="0.85" />
+                <ellipse cx="120" cy="55" rx="34" ry="26" fill="#4f785b" opacity="0.85" />
+                <ellipse cx="82" cy="42" rx="32" ry="22" fill="#689371" opacity="0.9" />
+                <!-- Hanging Fruit Lanterns (Interactive) -->
+                <!-- Fruit 1 -->
+                <g class="hanging-fruit" transform="translate(45, 78)">
+                  <line x1="0" y1="-8" x2="0" y2="0" stroke="#2b1d16" stroke-width="1.5" />
+                  <circle cx="0" cy="6" r="8" fill="#e07a5f" />
+                  <circle cx="-2" cy="4" r="2.5" fill="#ffeaa7" />
+                </g>
+                <!-- Fruit 2 -->
+                <g class="hanging-fruit" transform="translate(86, 58)">
+                  <line x1="0" y1="-8" x2="0" y2="0" stroke="#2b1d16" stroke-width="1.5" />
+                  <circle cx="0" cy="6" r="9" fill="#f4be5e" />
+                  <circle cx="-2" cy="4" r="3" fill="#ffffff" />
+                </g>
+                <!-- Fruit 3 -->
+                <g class="hanging-fruit" transform="translate(125, 70)">
+                  <line x1="0" y1="-8" x2="0" y2="0" stroke="#2b1d16" stroke-width="1.5" />
+                  <circle cx="0" cy="6" r="8.5" fill="#ea8f76" />
+                  <circle cx="-2" cy="4" r="2.5" fill="#ffeaa7" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <p class="project-description">
+            Gnarled apple and plum boughs where abandoned blog entries, draft poems, and forgotten webcomic outlines ripen into luminous narrative lanterns.
+          </p>
+
+          <!-- Interactive Controls -->
+          <div class="project-interactive-panel">
+            <button id="btn-shake-branch" class="interactive-mini-btn" style="width: 100%; justify-content: center;" aria-label="Shake branch to harvest a story fragment">
+              <span>🍏</span>
+              <span>Shake Bough / Harvest Story</span>
+            </button>
+            <div id="story-basket-display" class="harvest-basket" aria-live="polite">
+              “Tap a fruit lantern or shake the branch to catch a fallen story...”
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: The Tomorrow Machine -->
+        <article class="project-card" aria-labelledby="proj3-title">
+          <div class="project-header">
+            <span class="project-category">Project 03 • Mechanics</span>
+            <h3 id="proj3-title" class="project-title">The Tomorrow Machine</h3>
+          </div>
+
+          <!-- Visual Illustration Stage -->
+          <div class="project-visual-stage">
+            <div id="machine-stage" class="machine-stage">
+              <svg class="machine-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Steampunk botanical brass machine with turning cogs and sproutometer">
+                <!-- Brass Framework -->
+                <rect x="25" y="45" width="110" height="75" rx="6" fill="#2d3748" stroke="#d4af37" stroke-width="2.5" />
+                <!-- Glass Mercury/Sap Tube -->
+                <rect x="36" y="25" width="14" height="60" rx="7" fill="rgba(255,255,255,0.2)" stroke="#d4af37" stroke-width="1.5" />
+                <rect x="38" y="55" width="10" height="28" rx="5" fill="#52b788" />
+                <!-- Large Cog -->
+                <g class="brass-cog brass-cog-large" transform="translate(80, 75)">
+                  <circle cx="0" cy="0" r="22" fill="#d4af37" stroke="#8b6508" stroke-width="2" />
+                  <!-- Cog Teeth -->
+                  <path d="M -4 -25 L 4 -25 L 3 -21 L -3 -21 Z M -4 21 L 4 21 L 3 25 L -3 25 Z M -25 -4 L -25 4 L -21 3 L -21 -3 Z M 21 -4 L 21 4 L 25 3 L 25 -3 Z" fill="#8b6508" />
+                  <circle cx="0" cy="0" r="8" fill="#2d3748" stroke="#8b6508" stroke-width="1.5" />
+                </g>
+                <!-- Small Interlocking Cog -->
+                <g class="brass-cog brass-cog-small" transform="translate(112, 60)">
+                  <circle cx="0" cy="0" r="13" fill="#ea8f76" stroke="#8b3a2b" stroke-width="1.5" />
+                  <circle cx="0" cy="0" r="4" fill="#2d3748" />
+                </g>
+                <!-- Sprout-o-Meter Gauge -->
+                <path d="M 98 102 A 16 16 0 0 1 128 102" fill="none" stroke="#faf6ee" stroke-width="3" />
+                <line x1="113" y1="102" x2="120" y2="92" stroke="#e07a5f" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+
+          <p class="project-description">
+            A brass-and-vine contraption Morrow cobbled together using old motherboard traces and watch springs. It tests whether an odd idea has enough spark to grow.
+          </p>
+
+          <!-- Interactive Controls -->
+          <div class="project-interactive-panel">
+            <button id="btn-crank-machine" class="interactive-mini-btn" style="width: 100%; justify-content: center;" aria-label="Crank Tomorrow Machine to test an idea">
+              <span>⚙️</span>
+              <span>Crank Sprout-o-Meter</span>
+            </button>
+            <div id="machine-ticker-display" class="ticker-tape" aria-live="polite">
+              READY FOR ASSESSMENT
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 4. ORIGIN STORY: SCROLL-REVEALED SCENE SEQUENCE -->
+    <section id="origin" aria-labelledby="origin-heading">
+      <div class="section-header">
+        <span class="section-tag">~ Illustrated Tale ~</span>
+        <h2 id="origin-heading" class="section-title">The Origin of Morrow</h2>
+        <p class="section-desc">Scroll down through the chronology of how a lost byte in 2003 sprouted into a living sanctuary.</p>
+      </div>
+
+      <div class="origin-timeline">
+
+        <!-- Scene 1 -->
+        <article class="origin-card">
+          <div class="origin-number-marker">I</div>
+          <div class="origin-illustration-slot">
+            <!-- Illustrated Scene 1 SVG: The Falling Thought -->
+            <svg viewBox="0 0 200 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An idea falling through cyberspace">
+              <!-- Digital Grid Matrix -->
+              <path d="M 20 110 L 180 110 M 40 90 L 160 90 M 60 70 L 140 70" stroke="rgba(244,190,94,0.2)" stroke-width="1" />
+              <!-- Trailing Falling Seed Spark -->
+              <path d="M 160 15 Q 110 50 70 85" stroke="#f4be5e" stroke-width="2" stroke-dasharray="4,4" fill="none" />
+              <circle cx="70" cy="85" r="7" fill="#ffeaa7" />
+              <polygon points="70,72 73,81 82,83 74,89 76,98 70,92 64,98 66,89 58,83 67,81" fill="#f4be5e" />
+              <text x="110" y="32" font-family="monospace" font-size="10" fill="#c8d3e2">thread_id=2003_lost</text>
+            </svg>
+          </div>
+          <div class="origin-text-body">
+            <h4>Scene 1: The Falling Thought</h4>
+            <p>
+              In the late autumn of 2003, a visitor typed a thought onto an internet forum and closed their browser window without pressing ‘Submit’. The unposted sentence drifted off the screen and tumbled into the deep digital void.
+            </p>
+          </div>
+        </article>
+
+        <!-- Scene 2 -->
+        <article class="origin-card">
+          <div class="origin-number-marker">II</div>
+          <div class="origin-illustration-slot">
+            <!-- Illustrated Scene 2 SVG: The Digital Loam -->
+            <svg viewBox="0 0 200 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fertile digital soil gathering in server memory">
+              <!-- Soil layers & roots -->
+              <path d="M 0 80 Q 50 70 100 85 T 200 75 L 200 120 L 0 120 Z" fill="#3d2a1f" />
+              <path d="M 0 95 Q 60 90 120 100 T 200 95 L 200 120 L 0 120 Z" fill="#2b1d16" />
+              <!-- Buried forgotten floppy disk & circuit roots -->
+              <rect x="40" y="88" width="22" height="20" rx="2" fill="#546e7a" transform="rotate(12 40 88)" />
+              <path d="M 120 80 Q 130 95 145 110" stroke="#4f785b" stroke-width="2" fill="none" />
+              <circle cx="95" cy="74" r="5" fill="#f4be5e" />
+            </svg>
+          </div>
+          <div class="origin-text-body">
+            <h4>Scene 2: The Digital Loam</h4>
+            <p>
+              It didn’t vanish. It tumbled down through decommissioned webrings, forgotten IRC channels, and old server racks until it landed in a quiet patch of unallocated memory. Over the years, forgotten bookmarks and abandoned drafts had decayed into rich, fertile digital soil.
+            </p>
+          </div>
+        </article>
+
+        <!-- Scene 3 -->
+        <article class="origin-card">
+          <div class="origin-number-marker">III</div>
+          <div class="origin-illustration-slot">
+            <!-- Illustrated Scene 3 SVG: Morrow Awakens -->
+            <svg viewBox="0 0 200 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Morrow opening their eyes for the first time">
+              <ellipse cx="100" cy="75" rx="28" ry="32" fill="#557d60" stroke="#2b4733" stroke-width="2" />
+              <!-- Leaf Ears emerging -->
+              <path d="M 80 50 C 65 30 50 15 45 8 C 60 12 75 30 82 45 Z" fill="#76a081" stroke="#2b4733" stroke-width="1.5" />
+              <path d="M 120 50 C 135 30 150 15 155 8 C 140 12 125 30 118 45 Z" fill="#76a081" stroke="#2b4733" stroke-width="1.5" />
+              <!-- Curious Eyes -->
+              <ellipse cx="90" cy="70" rx="6" ry="8" fill="#faf6ee" />
+              <circle cx="90" cy="71" r="3.5" fill="#1b2a47" />
+              <ellipse cx="110" cy="70" rx="6" ry="8" fill="#faf6ee" />
+              <circle cx="110" cy="71" r="3.5" fill="#1b2a47" />
+              <!-- Sprouting soil base -->
+              <path d="M 60 105 Q 100 95 140 105 L 140 120 L 60 120 Z" fill="#3d2a1f" />
+            </svg>
+          </div>
+          <div class="origin-text-body">
+            <h4>Scene 3: Morrow Awakens</h4>
+            <p>
+              From the warm warmth of that digital loam, two soft leaf-ears poked through the moss. Morrow opened two round, curious eyes, wiped the dirt from their tiny feet, and looked around at the vast quiet of the forgotten web.
+            </p>
+          </div>
+        </article>
+
+        <!-- Scene 4 -->
+        <article class="origin-card">
+          <div class="origin-number-marker">IV</div>
+          <div class="origin-illustration-slot">
+            <!-- Illustrated Scene 4 SVG: The First Sprout -->
+            <svg viewBox="0 0 200 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Morrow tending the first blooming bellflower">
+              <path d="M 0 100 Q 100 90 200 100 L 200 120 L 0 120 Z" fill="#3d2a1f" />
+              <!-- First bloom -->
+              <path d="M 100 100 Q 95 65 100 40" stroke="#4f785b" stroke-width="3" fill="none" />
+              <path d="M 100 70 Q 82 65 80 55 Q 92 52 100 68" fill="#76a081" />
+              <path d="M 100 55 Q 118 50 120 40 Q 108 38 100 52" fill="#76a081" />
+              <!-- Glowing Bellflower -->
+              <path d="M 85 28 C 80 48, 120 48, 115 28 Z" fill="#b388ff" />
+              <circle cx="100" cy="45" r="3" fill="#f4be5e" />
+              <!-- Starlight sparkles -->
+              <text x="60" y="30" font-size="14">✨</text>
+              <text x="135" y="45" font-size="12">✨</text>
+            </svg>
+          </div>
+          <div class="origin-text-body">
+            <h4>Scene 4: The First Sprout</h4>
+            <p>
+              Morrow found an old silver teaspoon to use as a trowel and planted that first fallen sentence. Days later, a luminous bellflower unfurled. Since then, Morrow has tended every idea that never had the chance to bloom.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE GARDEN: PLANT A SEED & REVEAL TINY IDEAS -->
+    <section id="interactive-garden" aria-labelledby="garden-heading">
+      <div class="section-header">
+        <span class="section-tag">~ Living Soil Nursery ~</span>
+        <h2 id="garden-heading" class="section-title">The Interactive Garden</h2>
+        <p class="section-desc">Click any open soil patch to uncover a forgotten idea, or type your own quiet thought to plant it permanently.</p>
+      </div>
+
+      <div class="garden-wrapper">
+        <!-- Visitor Planting Station -->
+        <div class="planter-station">
+          <h3 class="planter-headline">
+            <span>🌿</span>
+            <span>Whisper a Seed to Morrow's Soil</span>
+          </h3>
+          <p class="planter-sub">Every thought you leave here takes root and blooms into a glowing tag.</p>
+
+          <form id="garden-idea-form" class="seed-form">
+            <div class="seed-input-row">
+              <input type="text" id="garden-idea-input" class="idea-input" placeholder="e.g. A comic strip about a snail librarian..." maxlength="100" required aria-label="Enter your forgotten idea to plant">
+              <button type="submit" class="plant-submit-btn">
+                <span>🌱</span>
+                <span>Plant in Soil</span>
+              </button>
+            </div>
+
+            <div class="seed-type-selector">
+              <span class="seed-type-label">Select Variety:</span>
+              <label class="seed-radio-btn selected" data-type="bellflower">
+                <input type="radio" name="seedVariety" value="bellflower" checked>
+                <span>🌸 Bellflower</span>
+              </label>
+              <label class="seed-radio-btn" data-type="fern">
+                <input type="radio" name="seedVariety" value="fern">
+                <span>🌿 Luminescent Fern</span>
+              </label>
+              <label class="seed-radio-btn" data-type="starspore">
+                <input type="radio" name="seedVariety" value="starspore">
+                <span>⭐ Star Spore</span>
+              </label>
+              <label class="seed-radio-btn" data-type="goldenvine">
+                <input type="radio" name="seedVariety" value="goldenvine">
+                <span>🍇 Sun Vine</span>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <!-- Garden Plots Bed -->
+        <div id="garden-plots-container" class="garden-bed-grid" aria-label="Garden bed containing planted ideas">
+          <!-- Populated dynamically by js/garden.js -->
+        </div>
+
+        <!-- Garden footer status -->
+        <div class="garden-actions-row">
+          <div id="garden-bloom-count" class="garden-counter">3 ideas blooming</div>
+          <button id="weed-garden-btn" class="weed-garden-btn" aria-label="Clear visitor plants back to starter state">
+            <span>🧹</span>
+            <span>Tidy Garden Bed</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 6. SECRET EASTER EGG MODAL DIALOGUE -->
+  <div id="easter-egg-modal" class="easter-egg-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="secret-modal-title">
+    <div class="secret-scroll-box">
+      <span class="secret-header-icon" aria-hidden="true">🌟</span>
+      <h3 id="secret-modal-title" class="secret-title">You Found Morrow’s Secret Cache!</h3>
+      
+      <p class="secret-message-text">
+        “Oh! You found my secret golden acorn! Most visitors just walk right past the moss. Did you know? Every 404 page in the universe is just an unplanted clearing waiting for Morrow's trowel. Because you took the time to look closely, you are now an honorary Internet Seedkeeper.”
+      </p>
+
+      <div class="certificate-stamp">
+        <strong>★ OFFICIAL INTERNET SEEDKEEPER ★</strong>
+        <span>Registration No. #0042 • Certified by Morrow</span>
+        <span>Issued at haX.baby • Baby's First Website Hackathon</span>
+      </div>
+
+      <button id="close-secret-modal" class="close-modal-btn">
+        <span>Keep Safe & Return to Garden</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 7. CREDITS FOOTER & 2003 RETRO CORNER -->
+  <footer class="storybook-footer">
+    <div class="footer-content">
+      <p class="footer-quote">
+        “May every little idea you carry find quiet soil, patient water, and enough room to bloom.”
+      </p>
+
+      <!-- Retro 88x31 Badges -->
+      <div class="retro-badges" aria-label="Web badges">
+        <div class="badge-88x31 badge-hax">
+          <span>haX.baby</span>
+          <span>Track 2</span>
+        </div>
+        <div class="badge-88x31 badge-html5">
+          <span>NO BLOAT</span>
+          <span>HTML5/SVG</span>
+        </div>
+        <div class="badge-88x31 badge-sound">
+          <span>WEB AUDIO</span>
+          <span>SYNTH 2003</span>
+        </div>
+        <div class="badge-88x31 badge-bestviewed">
+          <span>BEST IN</span>
+          <span>800x600</span>
+        </div>
+      </div>
+
+      <!-- Hit Counter (2003 Web Soul) -->
+      <div class="hit-counter" title="Total visitors to Morrow's Garden">
+        <span>VISITORS:</span>
+        <span id="hit-counter-digits">004812</span>
+      </div>
+
+      <!-- Visible Credits (Prompt Requirement) -->
+      <div class="credits-block">
+        <p>
+          <strong>Credits & Provenance:</strong><br>
+          Original Character Design, Story, & Botanical Illustrations: Hand-crafted in pure SVG for the haX.baby Hackathon.<br>
+          Audio: Procedural music-box & garden synthesizers engineered via native Web Audio API (zero external sound dependencies).<br>
+          Architecture: Zero-dependency semantic HTML5, modern modular CSS3, and vanilla ES6. No SaaS frameworks or gradient blobs were harmed.
+        </p>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+        © 2003–2026 Morrow’s Nursery • Crafted with quiet patience.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/sound.js"></script>
+  <script src="js/character.js"></script>
+  <script src="js/garden.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/easterEgg.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

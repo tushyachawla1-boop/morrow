@@ -1,0 +1,101 @@
+/* Theme definitions for Morrow: Night (Default) and Day */
+:root {
+  /* Common Brand Colors */
+  --c-midnight: #0d172a;
+  --c-midnight-deep: #080d19;
+  --c-midnight-light: #18263e;
+  --c-cream: #faf6ee;
+  --c-cream-soft: #f4edd8;
+  --c-cream-dark: #e8dcc4;
+  --c-leaf-dark: #375440;
+  --c-leaf-green: #4f785b;
+  --c-leaf-light: #76a081;
+  --c-leaf-mint: #9ec5a8;
+  --c-coral: #df7356;
+  --c-coral-soft: #ea8f76;
+  --c-coral-blush: #f4b2a2;
+  --c-yellow: #f4be5e;
+  --c-yellow-soft: #fad68a;
+  --c-yellow-glow: #ffe9b8;
+
+  /* Fonts */
+  --font-serif: "Georgia", "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+  --font-hand: "Chalkboard SE", "Comic Neue", "Caveat", "Gaegu", cursive, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  /* Theme Dynamic Variables (Night by default) */
+  --bg-sky: #0a1120;
+  --bg-gradient: radial-gradient(ellipse at 50% 20%, #172847 0%, #0d172a 55%, #070c17 100%);
+  --bg-card: rgba(22, 34, 56, 0.82);
+  --bg-card-solid: #152238;
+  --bg-input: rgba(13, 23, 42, 0.9);
+  --bg-paper: #16243d;
+  --text-main: #faf6ee;
+  --text-subtle: #cad5e2;
+  --text-muted: #8e9fb5;
+  --text-quote: #ffe9b8;
+  --border-organic: rgba(244, 190, 94, 0.28);
+  --border-strong: #f4be5e;
+  --border-leaf: #4f785b;
+  --shadow-glow: 0 0 25px rgba(244, 190, 94, 0.18);
+  --soil-color: #2b1d16;
+  --soil-rim: #3d2a1f;
+  --lantern-glow: rgba(244, 190, 94, 0.35);
+  --star-visibility: 1;
+  --sun-visibility: 0;
+  --firefly-display: block;
+  --butterfly-display: none;
+  --sky-badge: "Night in the Nursery";
+}
+
+[data-theme="day"] {
+  --bg-sky: #f7f1e3;
+  --bg-gradient: radial-gradient(ellipse at 50% 10%, #fff7e4 0%, #f6efe0 50%, #ede3ce 100%);
+  --bg-card: rgba(255, 253, 248, 0.9);
+  --bg-card-solid: #faf6ee;
+  --bg-input: #ffffff;
+  --bg-paper: #f4edd8;
+  --text-main: #202e24;
+  --text-subtle: #415647;
+  --text-muted: #647b6a;
+  --text-quote: #804825;
+  --border-organic: rgba(79, 120, 91, 0.32);
+  --border-strong: #4f785b;
+  --border-leaf: #375440;
+  --shadow-glow: 0 6px 20px rgba(100, 85, 60, 0.1);
+  --soil-color: #563d2e;
+  --soil-rim: #6e4e3c;
+  --lantern-glow: rgba(223, 115, 86, 0.2);
+  --star-visibility: 0;
+  --sun-visibility: 1;
+  --firefly-display: none;
+  --butterfly-display: block;
+  --sky-badge: "Morning in the Garden";
+}
+
+/* Base transitions between themes */
+body,
+header,
+section,
+footer,
+.card,
+.garden-bed,
+.vignette,
+.journal-sheet {
+  transition: background 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+              color 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.6s ease;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
